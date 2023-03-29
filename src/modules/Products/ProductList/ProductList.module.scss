@@ -26,17 +26,7 @@ tr:hover {
     background-color: #555;
 }
 
-td:first-child,
-th:first-child {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
 
-td:last-child,
-th:last-child {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
 
 @media (max-width: 600px) {
 
