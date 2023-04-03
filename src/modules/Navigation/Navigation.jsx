@@ -17,7 +17,7 @@ const Navigation = () => {
       ));
 
     return (
-        <div class={css.nav_container}>
+        <div className={css.nav_container}>
                 {elements}
         </div>
     )
