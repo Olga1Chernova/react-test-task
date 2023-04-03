@@ -1,3 +1,54 @@
+.productList_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
+
+.filter{
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    color: #714185;
+}
+
+.button_wrapper{
+    display: flex;
+    gap: 20px;
+}
+
+.filter_button{
+    display: block;
+    height: 40px;
+    background-color: #4d4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    
+        &:hover {
+            background-color: rgb(178, 124, 240);
+        }
+    
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #4d4d4d;
+        }
+}
+
+.list__label{
+    color: #fff;
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 600;    
+}
+
 .table {
     border-collapse: collapse;
     margin: 0 auto;
@@ -66,5 +117,41 @@ tr:hover {
         float: left;
         font-weight: bold;
         text-transform: uppercase;
+    }
+}
+
+.list__input {
+    background-color: #282828;
+    color: #fff;
+    border: 1px solid #714185;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    width: 100%;
+    font-size: 16px;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #4d4d4d;
+    }
+}
+
+.delete{
+    display: block;
+    background-color: #4d4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: rgb(178, 124, 240);
+    }
+    
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #4d4d4d;
     }
 }
