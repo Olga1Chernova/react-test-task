@@ -1,6 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+import { useState } from 'react';
+
 import css from './add-product-form.module.scss'
 
 import { initialValues } from './initialValues';
@@ -27,11 +29,13 @@ const validationSchema = Yup.object().shape({
 });
 
 function AddProductForm({ onSubmit }) {
-  
-  const handleSubmit = (event, formik) => {
-    event.preventDefault();
-    onSubmit(formik.values);
-    formik.resetForm();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (values, { setSubmitting }) => {
+    setIsSubmitting(true);
+    await onSubmit(values);
+    setIsSubmitting(false);
+    setSubmitting(false);
   };
 
   return (
@@ -183,7 +187,11 @@ function AddProductForm({ onSubmit }) {
                 placeholder="Enter a description"
               />
             </div>
-            <button type="submit" className={css.button}>
+            <button
+              type="submit"
+              className={css.button}
+              disabled={isSubmitting || !formik.dirty || !formik.isValid}
+            >
               Add Product
             </button>
           </Form>
