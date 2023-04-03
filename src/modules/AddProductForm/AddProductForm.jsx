@@ -3,13 +3,7 @@ import * as Yup from 'yup';
 
 import css from './add-product-form.module.scss'
 
-const initialValues = {
-  title: '',
-  author: '',
-  year: '',
-  rating: '',
-  category: '',
-};
+import { initialValues } from './initialValues';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required('Required'),
@@ -26,6 +20,10 @@ const validationSchema = Yup.object().shape({
     .min(0, 'Must be greater than or equal to 0')
     .max(5, 'Must be less than or equal to 5')
     .required('Required'),
+  description: Yup.string(),
+  price: Yup.number(),
+  photo: Yup.string(),
+  stock: Yup.number(),
 });
 
 function AddProductForm({ onSubmit }) {
@@ -46,7 +44,14 @@ function AddProductForm({ onSubmit }) {
               <label htmlFor="title" className={css.label}>
                 Title
               </label>
-              <Field type="text" name="title" id="name" className={css.field} />
+              <Field
+                type="text"
+                name="title"
+                id="name"
+                className={css.field}
+                onChange={formik.handleChange}
+                placeholder="Enter a product name"
+              />
               <ErrorMessage
                 name="title"
                 component="div"
@@ -62,6 +67,8 @@ function AddProductForm({ onSubmit }) {
                 name="author"
                 id="author"
                 className={css.field}
+                onChange={formik.handleChange}
+                placeholder="Enter author's name"
               />
               <ErrorMessage
                 name="author"
@@ -78,6 +85,8 @@ function AddProductForm({ onSubmit }) {
                 name="category"
                 id="category"
                 className={css.field}
+                onChange={formik.handleChange}
+                placeholder="Enter a product category"
               />
               <ErrorMessage
                 name="category"
@@ -94,6 +103,8 @@ function AddProductForm({ onSubmit }) {
                 name="year"
                 id="year"
                 className={css.field}
+                onChange={formik.handleChange}
+                placeholder="Enter a year"
               />
               <ErrorMessage name="year" component="div" className={css.error} />
             </div>
@@ -105,15 +116,71 @@ function AddProductForm({ onSubmit }) {
                 type="number"
                 name="rating"
                 id="rating"
-                step={0.1}
+                step={1}
                 max={5}
                 min={0}
                 className={css.field}
+                onChange={formik.handleChange}
+                placeholder="Enter a product rating"
               />
               <ErrorMessage
                 name="rating"
                 component="div"
                 className={css.error}
+              />
+            </div>
+            <div>
+              <label htmlFor="price" className={css.label}>
+                Price
+              </label>
+              <Field
+                min={0}
+                type="number"
+                name="price"
+                id="price"
+                className={css.field}
+                onChange={formik.handleChange}
+                placeholder="Enter a price"
+              />
+            </div>
+            <div>
+              <label htmlFor="stock" className={css.label}>
+                Stock
+              </label>
+              <Field
+                type="number"
+                name="stock"
+                id="stock"
+                min={0}
+                className={css.field}
+                onChange={formik.handleChange}
+                placeholder="Enter a stock"
+              />
+            </div>
+            <div>
+              <label htmlFor="photo" className={css.label}>
+                Photo
+              </label>
+              <Field
+                type="text"
+                name="photo"
+                id="photo"
+                className={css.field}
+                onChange={formik.handleChange}
+                placeholder="Enter a photo link"
+              />
+            </div>
+            <div>
+              <label htmlFor="description" className={css.label}>
+                Description
+              </label>
+              <Field
+                type="text"
+                name="description"
+                id="description"
+                className={css.field}
+                onChange={formik.handleChange}
+                placeholder="Enter a description"
               />
             </div>
             <button type="submit" className={css.button}>
