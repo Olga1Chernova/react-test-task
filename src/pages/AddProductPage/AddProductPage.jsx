@@ -8,8 +8,18 @@ import AddProductForm from "modules/AddProductForm/AddProductForm";
 const AddProductPage = () => {
     const dispatch = useDispatch();
 
-  const onAddProduct = ({ name, author, year, category }) => {
-      const action = fetchAddProduct({ name, author, year, category });
+  const onAddProduct = ({ title, author, year, category, rating, price, stock, photo, description }) => {
+      const action = fetchAddProduct({
+        title,
+        author,
+        year,
+        category,
+        rating,
+        price,
+        stock,
+        photo,
+        description,
+      });
       dispatch(action);
     };
 
