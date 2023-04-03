@@ -1,42 +1,24 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './ProductSearch.module.scss';
-import initialState from './initialState';
 
-const ProductsSearch = () => {
-  const [state, setState] = useState({ ...initialState });
-
-  const handleChange = ({ target }) => {
-    const value = target.value;
-    setState({name: value});
-  };
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   onSubmit({ name });
-  //   setState({ ...initialState });
-  // };
-
-  const { name } = state;
+const ProductsSearch = ({ handleChange, value }) => {
 
   return (
     <form className={styles.form}>
       <div className={styles.form__wrapper}>
-        <label className={styles.form__label}>Product Name</label>
+        <label className={styles.form__label}>Products search query</label>
         <input
           className={styles.form__input}
           onChange={handleChange}
-          placeholder="Enter a product name"
+          placeholder="Enter a product name or a category"
           type="text"
           name="name"
+          value={value}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces"
           required
         />
-        <button className={styles.form__button} type="submit">
-          Search
-        </button>
       </div>
     </form>
   );
@@ -44,6 +26,6 @@ const ProductsSearch = () => {
 
 export default ProductsSearch;
 
-ProductsSearch.propTypes = {
- // onSubmit: PropTypes.func.isRequired,
+ProductsSearch.propTypes = { 
+  handleChange: PropTypes.func.isRequired,
 };
