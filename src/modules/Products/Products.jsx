@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 import { getFilteredProducts } from 'redux/products/products-selectors';
+import { getAllProducts } from 'shared/services/products-api';
 
 import { setFilter } from 'redux/filter/filter-slice';
 import { getFilter } from 'redux/filter/filter-selectors';
@@ -12,12 +15,29 @@ import ProductsSearch from './ProductsSearch/ProductsSearch';
 import styles from './Products.module.scss';
 
 const Products = () => {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const data = await getAllProducts();
+        setItems(data.products);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, [setError, setItems, setLoading]);
 
   const filter = useSelector(getFilter);
   const handleFilter = ({ target }) => dispatch(setFilter(target.value));
 
   const dispatch = useDispatch();
-  const filteredProducts = useSelector(getFilteredProducts);
 
   const onDeleteProduct = id => {
     const action = fetchDeleteProduct(id);
@@ -28,7 +48,7 @@ const Products = () => {
   return (
     <div className={styles.mainWrapper}>
       <ProductsSearch value={filter} handleChange={handleFilter} />
-      <ProductList deleteProduct={onDeleteProduct} products={filteredProducts} />
+      <ProductList deleteProduct={onDeleteProduct} products={items} />
     </div>
   );
 };

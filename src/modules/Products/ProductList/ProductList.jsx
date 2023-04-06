@@ -10,35 +10,35 @@ const ProductList = ({ products, deleteProduct }) => {
   const [sortDirection, setSortDirection] = useState('asc');
   const [categoryFilter, setCategoryFilter] = useState(null);
 
-  const sortProducts = key => {
-    if (sortKey === key) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortKey(key);
-      setSortDirection('asc');
-    }
-  };
+  // const sortProducts = key => {
+  //   if (sortKey === key) {
+  //     setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+  //   } else {
+  //     setSortKey(key);
+  //     setSortDirection('asc');
+  //   }
+  // };
 
-  const filterProducts = category => {
-    setCategoryFilter(category ? category.toLowerCase() : null);
-  };
+  // const filterProducts = category => {
+  //   setCategoryFilter(category ? category.toLowerCase() : null);
+  // };
 
-  const filteredProducts = products.filter(
-    product =>
-      !categoryFilter || product.category.toLowerCase() === categoryFilter
-  );
+  // const filteredProducts = products.filter(
+  //   product =>
+  //     !categoryFilter || product.category.toLowerCase() === categoryFilter
+  // );
 
-  const sortedProducts = sortKey
-    ? filteredProducts.slice().sort((a, b) => {
-        if (a[sortKey] < b[sortKey]) {
-          return sortDirection === 'asc' ? -1 : 1;
-        } else if (a[sortKey] > b[sortKey]) {
-          return sortDirection === 'asc' ? 1 : -1;
-        } else {
-          return 0;
-        }
-      })
-    : filteredProducts;
+  // const sortedProducts = sortKey
+  //   ? filteredProducts.slice().sort((a, b) => {
+  //       if (a[sortKey] < b[sortKey]) {
+  //         return sortDirection === 'asc' ? -1 : 1;
+  //       } else if (a[sortKey] > b[sortKey]) {
+  //         return sortDirection === 'asc' ? 1 : -1;
+  //       } else {
+  //         return 0;
+  //       }
+  //     })
+  //   : filteredProducts;
 
   return (
     <div>
@@ -48,18 +48,18 @@ const ProductList = ({ products, deleteProduct }) => {
           <div className={styles.button_wrapper}>
             <button
               className={styles.filter_button}
-              onClick={() => sortProducts('id')}
+             // onClick={() => sortProducts('id')}
             >
               ID
             </button>
             <button
-              onClick={() => sortProducts('name')}
+             // onClick={() => sortProducts('name')}
               className={styles.filter_button}
             >
               Name
             </button>
             <button
-              onClick={() => sortProducts('price')}
+             // onClick={() => sortProducts('price')}
               className={styles.filter_button}
             >
               Price
@@ -70,25 +70,25 @@ const ProductList = ({ products, deleteProduct }) => {
           <p className={styles.filter}>Filter by:</p>
           <div className={styles.button_wrapper}>
             <button
-              onClick={() => filterProducts(null)}
+             // onClick={() => filterProducts(null)}
               className={styles.filter_button}
             >
               All
             </button>
             <button
-              onClick={() => filterProducts('Electronics')}
+             // onClick={() => filterProducts('Electronics')}
               className={styles.filter_button}
             >
               Electronics
             </button>
             <button
-              onClick={() => filterProducts('Clothing')}
+            //  onClick={() => filterProducts('Clothing')}
               className={styles.filter_button}
             >
               Clothing
             </button>
             <button
-              onClick={() => filterProducts('Books')}
+             // onClick={() => filterProducts('Books')}
               className={styles.filter_button}
             >
               Books
@@ -111,14 +111,14 @@ const ProductList = ({ products, deleteProduct }) => {
           </tr>
         </thead>
         <tbody>
-          {sortedProducts.map(product => (
+          {products.map(product => (
             <tr key={product.id}>
               <td>{product.id}</td>
               <td>{product.title}</td>
               <td>{product.description}</td>
               <td>{product.price}</td>
               <td>
-                <img src={product.photo} alt={product.title} />
+                <img src={product.images[0]} alt={product.title} width='190px'/>
               </td>
               <td>{product.rating}</td>
               <td>{product.stock}</td>
@@ -141,11 +141,6 @@ const ProductList = ({ products, deleteProduct }) => {
 
 export default ProductList;
 ProductList.defaultProps = {
-  products: PropTypes.array.isRequired,
-  deleteProduct: PropTypes.func.isRequired,
-};
-
-ProductList.propTypes = {
-  products: PropTypes.array.isRequired,
+  products: PropTypes.object.isRequired,
   deleteProduct: PropTypes.func.isRequired,
 };
