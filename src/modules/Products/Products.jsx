@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-import { getFilteredProducts } from 'redux/products/products-selectors';
 import { getAllProducts } from 'shared/services/products-api';
 
 import { setFilter } from 'redux/filter/filter-slice';
@@ -32,7 +31,7 @@ const Products = () => {
       }
     };
     fetchProducts();
-  }, [setError, setItems, setLoading]);
+  }, [setError, setItems, setLoading, loading, error]);
 
   const filter = useSelector(getFilter);
   const handleFilter = ({ target }) => dispatch(setFilter(target.value));
